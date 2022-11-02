@@ -135,7 +135,7 @@ public class VoiceAlert extends Fragment {
             for (int i = 0; i < matches.size() ; i++) {
                 user_chat += matches.get(i);
             }
-            request_Chat(user_chat,"http://172.30.1.52:8080/chat_request");
+            request_Chat(user_chat,"http://4fd0-34-126-76-38.ngrok.io/chat_request");
 
         }
 
@@ -171,7 +171,8 @@ public class VoiceAlert extends Fragment {
         CheckPermission();
 
         bar = rootView.findViewById(R.id.progressBar);
-        //tmpTextView.setText(recipeNowString);
+        tmpTextView = rootView.findViewById(R.id.tmpTextView);
+        tmpTextView.setText(recipeNowString);
 
         barCurrentValue = bar.getProgress();
         barMaxValue = bar.getMax();
@@ -284,7 +285,7 @@ public class VoiceAlert extends Fragment {
 
     public void ResetText(){
         recipeNowString = data.getRecipeData(current_index);
-        //tmpTextView.setText(recipeNowString);
+        tmpTextView.setText(recipeNowString);
     }
 
     public void CheckPermission() {
@@ -303,7 +304,7 @@ public class VoiceAlert extends Fragment {
     public void request_Chat(String user_chat, String Url){
 
         String JSON = "{\"chatString\":\""+user_chat+"\"}";
-        mainActivity.sendHttpApi(JSON,Url,106);
+        mainActivity.sendHttpApi(JSON.replace("null",""),Url,106);
     }
 
     public void Chat_result(int control){
